@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{Component}from 'react';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import  LeftSide from './compents/left'
+import  RightSide from './compents/right'
+class App extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectValue:'',
+      types:[{
+        type:'Square',
+        typeValue:'正方形'
+      },{
+        type:'Rectangle',
+        typeValue:'长方形'
+      },{
+        type:'circular',
+        typeValue:'圆形'
+      }]
+    }
+    this.handlechangType = this.handlechangType.bind(this)
+  }
+  handlechangType(type){
+    this.setState({selectValue:type });
+  }
+  render() {
+    return (<div>
+      <LeftSide className="leftside"  types={this.state.types} changType={(type)=>{this.handlechangType(type)}}></LeftSide>
+      <RightSide className="rightside" selectValue={this.state.selectValue}></RightSide>  
+    </div>)
+  }
 }
-
 export default App;
